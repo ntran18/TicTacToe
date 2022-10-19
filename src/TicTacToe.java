@@ -4,9 +4,9 @@ public class TicTacToe {
     private char[][] board;
     private static final char HUMAN = 'X';
     private static final char AI = 'O';
-    private static ArrayList<Integer> humanPositions = new ArrayList<Integer>();
-    private static ArrayList<Integer> aiPositions = new ArrayList<Integer>();
-    private final static List<List> WIN_CONDITIONS = new ArrayList<List>();
+    private static ArrayList<Integer> humanPositions;
+    private static ArrayList<Integer> aiPositions;
+    private static final List<List> WIN_CONDITIONS = new ArrayList<List>();
 
     public TicTacToe(char[][] board) {
         this.board = board;
@@ -38,6 +38,9 @@ public class TicTacToe {
 
     public void play(String level) {
         printBoard();
+        humanPositions = new ArrayList<Integer>();
+        aiPositions = new ArrayList<Integer>();
+
         ArrayList<Character> playerList = new ArrayList<Character>();
         playerList.add(HUMAN);
         playerList.add(AI);
@@ -67,8 +70,8 @@ public class TicTacToe {
 
     public void playTurn(String level, char player) {
         var pos = 0;
-        Scanner scan = new Scanner(System.in);
-        Random rand = new Random();
+        var scan = new Scanner(System.in);
+        var rand = new Random();
         if (player == HUMAN) {
             System.out.println("Enter your placement (1-9):");
             pos = scan.nextInt();
@@ -199,7 +202,7 @@ public class TicTacToe {
 
     private static char checkWinner() {
         char result = ' ';
-        for (List l : WIN_CONDITIONS) {
+        for (var l : WIN_CONDITIONS) {
             if (humanPositions.containsAll(l)) {
                 return HUMAN;
             } else if (aiPositions.containsAll(l)) {
